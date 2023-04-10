@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Timer</title>
+</head>
+<body>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+        crossorigin="anonymous"
+      />
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+        crossorigin="anonymous"
+      />
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Timer</title>
+      <style>
+        .timer {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 100px;
+        }
+  
+        .time {
+          font-size: 4em;
+          margin-bottom: 50px;
+        }
+  
+        .buttons {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+        }
+  
+        button {
+          width: 30%;
+        }
+      </style>
+    </head>
+    <body>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Timer</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="digital_clock.html"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="timer.html"
+                  >Timer</a
+                >
+              </li>
+            </ul>
+  
+            <form
+              class="d-flex"
+              action="https://www.google.com/search"
+              method="get"
+              role="search"
+            >
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="timer">
+          <div class="time">00:00:00</div>
+          <div class="buttons">
+            <button id="start" class="btn btn-primary">Start</button>
+            <button id="pause" class="btn btn-primary">Pause</button>
+            <button id="reset" class="btn btn-primary">Reset</button>
+          </div>
+        </div>
+      </div>
+  
+      <script> // Get the timer elements from the DOM
+        const timeEl = document.querySelector('.time');
+        const startBtn = document.querySelector('#start');
+        const pauseBtn = document.querySelector('#pause');
+        const resetBtn = document.querySelector('#reset');
+        
+        // Initialize the timer values
+        let time = 0;
+        let intervalId;
+        
+        // Define a function to format the time as a string
+        function formatTime(ms) {
+          const minutes = Math.floor(ms / 60000);
+          const seconds = Math.floor((ms % 60000) / 1000);
+          const centiseconds = Math.floor((ms % 1000) / 10);
+          return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${centiseconds.toString().padStart(2, '0')}`;
+        }
+        
+        // Define a function to update the timer display
+        function updateTimer() {
+          timeEl.textContent = formatTime(time);
+        }
+        
+        // Define a function to start the timer
+        function startTimer() {
+          if (!intervalId) {
+            intervalId = setInterval(() => {
+              time += 10;
+              updateTimer();
+            }, 10);
+          }
+        }
+        
+        // Define a function to pause the timer
+        function pauseTimer() {
+          clearInterval(intervalId);
+          intervalId = null;
+        }
+        
+        // Define a function to reset the timer
+        function resetTimer() {
+          time = 0;
+          updateTimer();
+          pauseTimer();
+        }
+        
+        // Add event listeners to the buttons
+        startBtn.addEventListener('click', startTimer);
+        pauseBtn.addEventListener('click', pauseTimer);
+        resetBtn.addEventListener('click', resetTimer);
+        </script>
+  
+    </body>
+  </html>
+  
+  
+</body>
+</html>
